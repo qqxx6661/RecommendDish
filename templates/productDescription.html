@@ -3,7 +3,7 @@
 <head>
 <title>Product Description</title>
 <link rel="stylesheet" href={{url_for('static', filename='css/productDescription.css')}} />
-<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css')}} />
+<link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css')}} />
 </head>
 <body>
 <div id="title">
@@ -17,7 +17,7 @@
 
 	{% if not loggedIn %}
 	<div id="signInButton">
-		<a class="link" href="/loginForm">Sign In</a>
+		<a class="link" href="/loginForm">登录</a>
 	</div>
 	{% else %}
 	<div class="dropdown">
@@ -68,10 +68,11 @@
 		<a href="/addToCart?productId={{request.args.get('productId')}}">添加到购物车</a>
 	</div>
 </div>
-<div class="display">
+<div>
+    {% if not loggedIn %}
 	<div>
 		<h2>与 {{data[1]}} 类似的菜：</h2>
-		{% for data in likeDish %}
+		{% for data in likeDishno %}
 		<table>
 			<tr id="productName">
 				{% for row in data %}
@@ -80,11 +81,11 @@
 				</td>
 				{% endfor %}
 			</tr>
-			<tr id="productImage">
+			<tr id="itemImage">
 				{% for row in data %}
 				<td>
 					<a href="/productDescription?productId={{row[0]}}">
-						<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" />
+						<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="productImage" />
 					</a>
 				</td>
 				{% endfor %}
@@ -99,6 +100,73 @@
 		</table>
 		{% endfor %}
 	</div>
+	{% else %}
+	<div>
+		<h2>与 {{data[1]}} 类似的菜：</h2>
+		{% for data in likeDish %}
+		<table>
+			<tr id="productName">
+				{% for row in data %}
+				<td>
+					{{row[1]}}
+				</td>
+				{% endfor %}
+			</tr>
+			<tr id="itemImage">
+				{% for row in data %}
+				<td>
+					<a href="/productDescription?productId={{row[0]}}">
+						<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="productImage" />
+					</a>
+				</td>
+				{% endfor %}
+			</tr>
+			<tr id="productPrice">
+				{% for row in data %}
+				<td>
+					￥{{row[2]}}
+				</td>
+				{% endfor %}
+			</tr>
+		</table>
+		{% endfor %}
+	</div>
+    {% endif %}
+</div>
+<div>
+    <h2>对 {{data[1]}} 进行打分：</h2>
+    <form>
+    <input type="radio" name="star" value="5">5分
+    <input type="radio" name="star" value="4.5">4.5分
+    <input type="radio" name="star" value="4">4分
+    <input type="radio" name="star" value="3.5">3.5分
+    <input type="radio" name="star" value="3" checked>3分
+    <input type="radio" name="star" value="2.5">2.5分
+    <input type="radio" name="star" value="2">2分
+    <input type="radio" name="star" value="1.5">1.5分
+    <input type="radio" name="star" value="1">1分
+    <input type="radio" name="star" value="0.5">0.5分
+    <input type="radio" name="star" value="0">0分
+    <br><br>
+    <input type="submit" value="提交打分">
+    </form>
+</div>
+<div>
+    <h2>对 {{data[1]}} 进行点评：</h2>
+    <form>
+    您的点评（200字以内）:<br>
+    <input type="text" name="firstname" value="输入您的评论">
+    <br><br>
+    <input type="submit" value="提交点评">
+    </form>
+</div>
+<div>
+    <h2>{{data[1]}} 的平均分为：4.5 分</h2>
+</div>
+<div class="divcss5">
+    <h2>{{data[1]}} 用户点评：</h2>
+    <p><b>用户 test001（已打分：4.5）：</b>不错！！！</p>
+    <p><b>用户 test002：</b>很好吃。</p>
 </div>
 </body>
 </html>

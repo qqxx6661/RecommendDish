@@ -217,9 +217,12 @@ def productDescription():
         productData = cur.fetchone()
         cur.execute('SELECT productId, name, price, description, image, stock FROM products where productId = 17 or productId = 26 or productId = 28 or productId = 29 or productId = 31')
         likeDish = cur.fetchall()
+        cur.execute('SELECT productId, name, price, description, image, stock FROM products where productId = 22 or productId = 28 or productId = 31 or productId = 26 or productId = 29')
+        likeDishno = cur.fetchall()
     likeDish = parse(likeDish)
+    likeDishno = parse(likeDishno)
     conn.close()
-    return render_template("productDescription.html", data=productData, loggedIn = loggedIn, firstName = firstName, noOfItems = noOfItems, likeDish=likeDish)
+    return render_template("productDescription.html", data=productData, loggedIn = loggedIn, firstName = firstName, noOfItems = noOfItems, likeDish=likeDish, likeDishno=likeDishno)
 
 @app.route("/addToCart")
 def addToCart():
