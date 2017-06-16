@@ -7,15 +7,12 @@
 </head>
 <body>
 <div id="title">
-	<a href="/">
-		<img id="logo" src= {{ url_for('static', filename='images/new.jpg') }} />
-	</a>
 	<div>
-		<h1><font size="15"><font color="#FFFFFF">智能订餐推荐系统</font></font></h1>
+		<h1 align="center"><font size="15"><font color="#FFFFFF">智能订餐推荐系统</font></font></h1>
 	</div>
 	{% if not loggedIn %}
 	<div id="signInButton">
-		<a class="link" href="/loginForm"><font size="5">登录</font></a>
+		<a class="link" href="/loginForm" ><font size="5">登录</font></a>
 	</div>
 	{% else %}
 	<div class="dropdown">

@@ -7,21 +7,17 @@
 </head>
 <body>
 <div id="title">
-	<a href="/">
-	<img id="logo" src= {{ url_for('static', filename='images/new.jpg') }} />
-	</a>
-	<form>
-		<input id="searchBox" type="text" name="searchQuery">
-		<input id="searchButton" type="submit" value="Search">
-	</form>
+	<div>
+		<h1 align="center"><font size="15"><font color="#FFFFFF">智能订餐推荐系统</font></font></h1>
+	</div>
 
 	{% if not loggedIn %}
 		<div id="signInButton">
-			<a class="link" href="/loginForm">Sign In</a>
+			<a class="link" href="/loginForm" ><font size="5">登录</font></a>
 		</div>
 	{% else %}
 	<div class="dropdown">
-		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<button class="dropbtn">欢迎您, <br>{{firstName}}</button>
 		<div class="dropdown-content">
 			<a href="/account/orders">Your orders</a>
 			<a href="/account/profile">Your profile</a>
@@ -38,7 +34,7 @@
 	</div>
 </div>
 <div id="cartItems">
-	<h2>Shopping Cart</h2>
+	<h2>菜单</h2>
 	<div id="tableItems">
 		{% for row in products %}
 		<div>
@@ -48,8 +44,8 @@
 			</div>
 			<div id="itemName">
 				<span id="itemNameTag">{{row[1]}}</span><br>
-				In stock<br>
-				<a href="/removeFromCart?productId={{row[0]}}">Remove</a>
+				有库存<br>
+				<a href="/removeFromCart?productId={{row[0]}}">删除</a>
 			</div>
 			<div id="itemPrice">
 				￥{{row[2]}}
@@ -58,11 +54,11 @@
 		{% endfor %}
 		<hr id="seperator">
 		<div id="total">
-			<span id="subtotal">Subtotal</span> : ￥{{totalPrice}}
+			<span id="subtotal">总价</span> : ￥{{totalPrice}}
 		</div>
 	</div>
 </div>
-<a href="/checkout">Proceed to checkout</a>
+<a href="/checkout">结算菜品</a>
 </body>
 </html>
 
